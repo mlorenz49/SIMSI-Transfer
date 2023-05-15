@@ -1,4 +1,4 @@
-# SIMSI-Transfer
+# SIMSI-Transfer michi version
 
 [![PyPI version](https://img.shields.io/pypi/v/simsi_transfer.svg?logo=pypi&logoColor=FFE873)](https://pypi.org/project/simsi_transfer/)
 [![Supported Python versions](https://img.shields.io/pypi/pyversions/simsi_transfer.svg?logo=python&logoColor=FFE873)](https://pypi.org/project/simsi_transfer/)
