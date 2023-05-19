@@ -77,7 +77,7 @@ def run_msms_parser(filepath_raw, filepath_msms, filepath_output, mode):
 
             raw_loop(simsi, filepath_output_string)
     else:
-        print("Not a valid psm input format")
+        logger.error("Not a valid psm input format")
 
     logger.info("finished parsing")
     logger.info("")

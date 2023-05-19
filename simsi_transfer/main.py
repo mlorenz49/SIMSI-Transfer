@@ -16,12 +16,15 @@ from . import transfer
 from . import evidence
 from .utils import utils
 
+from .simsi_ascore import __main__
+
 logger = logging.getLogger(__name__)
 
 
 def main(argv):
     meta_input_df, pvals, output_folder, num_threads, ms_level, tmt_requantify, \
-    filter_decoys, ambiguity_decision, curve_columns, max_pep = cli.parse_args(argv)
+        filter_decoys, ambiguity_decision, curve_columns, max_pep, mode \
+        = cli.parse_args(argv)
 
     raw_folders = utils.convert_to_path_list(meta_input_df['raw_folder'])
     mq_txt_folders = utils.convert_to_path_list(meta_input_df['mq_txt_folder'])
@@ -140,6 +143,13 @@ def main(argv):
         evidence_simsi = evidence.build_evidence(msms_simsi, evidence_mq, allpeptides_mq, plex)
         simsi_output.export_simsi_evidence_file(evidence_simsi, output_folder, pval)
         logger.info(f'Finished SIMSI-Transfer evidence.txt building.')
+        logger.info(f'')
+
+    if mode == "ascore":
+        logger.info(f'Beginning ascoring of SIMSI-Transfer msms.txt')
+        __main__.main(output_folder / "mzML", output_folder / "summaries", output_folder / "psm_min",
+                      "simsi", output_folder / "ascores", output_folder / "summaries_ascored")
+        logger.info(f'finished ascoring of SIMSI-Transfer msms.txt')
         logger.info('')
 
     endtime = datetime.now()

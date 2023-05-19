@@ -7,7 +7,7 @@ import time
 import warnings
 
 import pyascore
-import spec_parsers
+from . import spec_parsers
 
 logger = logging.getLogger(__name__)
 

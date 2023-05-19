@@ -17,7 +17,7 @@ class ArgumentParserWithLogger(argparse.ArgumentParser):
 
 
 def parse_args(argv):
-    desc = f'SIMSI-Transfer version {__version__}\n{__copyright__}' 
+    desc = f'SIMSI-Transfer version {__version__}\n{__copyright__}'
     apars = ArgumentParserWithLogger(
         description=desc, formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
@@ -91,14 +91,16 @@ def parse_args(argv):
                        Maximum Posterior Error Probability (PEP) in percent of PSMs to be considered for transfers.
                        ''')
 
+    apars.add_argument("--mode", default=None, metavar="S", type=str,
+                       help="ascoring mode: type 'ascore' in the case that ascores should be calculated")
     # ------------------------------------------------
     args = apars.parse_args(argv)
 
     meta_input_df = get_input_folders(args)
 
     return meta_input_df, parse_stringencies(args.stringencies), Path(args.output_folder), args.num_threads, \
-           args.tmt_ms_level, args.tmt_requantify, args.filter_decoys, args.ambiguity_decision, \
-           args.add_plotting_columns, args.maximum_pep
+        args.tmt_ms_level, args.tmt_requantify, args.filter_decoys, args.ambiguity_decision, \
+        args.add_plotting_columns, args.maximum_pep, args.mode
 
 
 def get_input_folders(args):
